@@ -19,57 +19,6 @@
     </style>
 </head>
 <body>
-    <main>
-        <div id="room" class="room"></div>
-    </main>
-
-    <script>
-        function generateRoom() {
-            const width = 10;
-            const height = 10;
-            const room = Array.from({ length: height }, () => Array(width).fill(' '));
-
-            // Place boundary walls
-            for (let i = 0; i < width; i++) {
-                room[0][i] = '#';
-                room[height - 1][i] = '#';
-            }
-            for (let i = 0; i < height; i++) {
-                room[i][0] = '#';
-                room[i][width - 1] = '#';
-            }
-
-            // Place 10 internal walls
-            let wallsPlaced = 0;
-            while (wallsPlaced < 10) {
-                const x = Math.floor(Math.random() * (width - 2)) + 1;
-                const y = Math.floor(Math.random() * (height - 2)) + 1;
-                if (room[y][x] === ' ') {
-                    room[y][x] = '#';
-                    wallsPlaced++;
-                }
-            }
-
-            // Place 1 mystery box
-            while (true) {
-                const mx = Math.floor(Math.random() * (width - 2)) + 1;
-                const my = Math.floor(Math.random() * (height - 2)) + 1;
-                if (room[my][mx] === ' ') {
-                    room[my][mx] = '?';
-                    break;
-                }
-            }
-
-            return room;
-        }
-
-        function printRoom(room) {
-            return room.map(row => row.join('')).join('\n');
-        }
-
-        // Generate and display the room
-        const room = generateRoom();
-        document.getElementById('room').textContent = printRoom(room);
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
