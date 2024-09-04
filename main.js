@@ -84,3 +84,52 @@ for (let i = 0; i < str.length; i++) {
 }
 
 
+//  10 "Mystery Room", Write a code that will generate 2d representation of a room. you should generate an empty space, wall or a mystery box. You can use any characters you want. The room should be 10x10. The room should have 10 walls, 1 mystery boxes and the rest should be empty space, mystey box location should be random!. The room should look something like this:
+// ##########
+// #?       #
+// #        #
+// #        #
+// #        #
+// #        #
+// #        #
+// #        #
+// #        #
+// ##########
+
+const roomSize = 10;
+let room = Array(roomSize).fill().map(() => Array(roomSize).fill(' '));
+
+// Set the walls
+for (let i = 0; i < roomSize; i++) {
+    room[0][i] = '#';
+    room[roomSize - 1][i] = '#';
+    room[i][0] = '#';
+    room[i][roomSize - 1] = '#';
+}
+
+// Add 10 additional walls inside the room
+let wallsPlaced = 0;
+while (wallsPlaced < 10) {
+    const row = Math.floor(Math.random() * (roomSize - 2)) + 1;
+    const col = Math.floor(Math.random() * (roomSize - 2)) + 1;
+    if (room[row][col] === ' ') {
+        room[row][col] = '#';
+        wallsPlaced++;
+    }
+}
+
+// Add 1 mystery box
+let mysteryBoxPlaced = false;
+while (!mysteryBoxPlaced) {
+    const row = Math.floor(Math.random() * (roomSize - 2)) + 1;
+    const col = Math.floor(Math.random() * (roomSize - 2)) + 1;
+    if (room[row][col] === ' ') {
+        room[row][col] = '?';
+        mysteryBoxPlaced = true;
+    }
+}
+
+// Print the room
+room.forEach(row => {
+    console.log(row.join(''));
+});
